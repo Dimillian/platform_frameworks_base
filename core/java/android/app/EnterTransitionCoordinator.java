@@ -644,6 +644,14 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
 
             // Find the location in the view's parent
             ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent == null) {
+                //It can happens. I got crash from that. So just ignore the fucking animations. 
+                //Something must be fucked up in my ListView, but still, it should not crash at this level.
+                //Hope to get that somewhered in Android 5.X
+                //Anyway
+                //Rent: Off
+                return;
+            }
             Matrix matrix = new Matrix();
             parent.transformMatrixToLocal(matrix);
 
